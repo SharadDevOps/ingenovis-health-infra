@@ -1,31 +1,31 @@
-
 resource "azurerm_virtual_network" "this" {
   name                = "vnet-ing-${var.brand}-${var.environment}"
+  address_space       = [var.vnet_address_space]
   location            = var.location
   resource_group_name = var.resource_group_name
-  address_space       = [var.vnet_address_space]
-    tags = {
-        brand       = var.brand
-        environment = var.environment
-        managed_by  = "Terraform"
-    }   
+
+  tags = {
+    brand       = var.brand
+    environment = var.environment
+    managed_by  = "terraform"
+  }
 }
 
-resource "azurerm_subnet" "aks-subnet" {
-  name                 = "subnet-ing-${var.brand}-${var.environment}-aks"
+# Subnet per resource category, per the "Subnet separation at resource category level" requirement
+resource "azurerm_subnet" "aks" {
+  name                 = "sn-ing-${var.brand}-${var.environment}-aks"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = var.azurerm_virtual_network.this.name
- 
+  virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = [var.aks_subnet_prefix]
 }
 
-resource "azurerm_subnet" "storage-subnet" {
-  name                 = "subnet-ing-${var.brand}-${var.environment}-storage"
+resource "azurerm_subnet" "storage" {
+  name                 = "sn-ing-${var.brand}-${var.environment}-strg"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = var.azurerm_virtual_network.this.name
- 
+  virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = [var.storage_subnet_prefix]
-  service_endpoints     = ["Microsoft.Storage"]
+
+  service_endpoints = ["Microsoft.Storage"]
 }
 
 resource "azurerm_subnet" "private_endpoints" {
@@ -108,6 +108,7 @@ resource "azurerm_network_security_group" "private_endpoints" {
   }
 }
 
+# Associate each NSG to its matching subnet
 resource "azurerm_subnet_network_security_group_association" "aks" {
   subnet_id                 = azurerm_subnet.aks.id
   network_security_group_id = azurerm_network_security_group.aks.id

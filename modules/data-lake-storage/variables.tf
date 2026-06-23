@@ -15,6 +15,6 @@ variable "resource_group_name" {
 }
 
 variable "private_endpoints_subnet_id" {
-  description =  "Subnet ID where the Event Hub's private endpoint will be created"
+  description =  "Subnet ID where the Data Lake Storage private endpoint will be created"
   type        = string
 }

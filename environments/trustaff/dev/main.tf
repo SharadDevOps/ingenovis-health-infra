@@ -40,5 +40,20 @@ module "keyvault" {
 
 }
 
+module "data_lake_storage" {
+  source                      = "../../../modules/data-lake-storage"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}
 
-
+module "event_hub" {
+  source                      = "../../../modules/event-hub"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}

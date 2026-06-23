@@ -11,7 +11,8 @@ resource "azurerm_key_vault" "this" {
   purge_protection_enabled    = true
   soft_delete_retention_days  = 90
 
-  # RBAC model is default - no legacy access policies, matches "Azure RBAC using UAMI" requirement
+  # RBAC model, not legacy access policies - matches "Azure RBAC using UAMI" requirement
+  enable_rbac_authorization = true
 
   # No public network access - private endpoint only, per the guardrails document
   public_network_access_enabled = false

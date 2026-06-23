@@ -34,13 +34,6 @@ variable "private_endpoints_subnet_prefix" {
   type        = string
 }
 
-
-variable "subnet_address_prefixes" {
-  description = "Subnet address prefixes. Set in main.tf."
-  type        = string
-}
-
-
 variable "tenant_id" {
   description = "Azure tenant ID"
   type        = string

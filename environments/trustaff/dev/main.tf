@@ -57,3 +57,31 @@ module "event_hub" {
   location                    = var.location
   private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
 }
+
+
+module "azure_openai" {
+  source                      = "../../../modules/azure-openai"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}
+
+module "cosmos_db" {
+  source                      = "../../../modules/cosmos-db"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}
+
+module "ai_search" {
+  source                      = "../../../modules/ai-search"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}

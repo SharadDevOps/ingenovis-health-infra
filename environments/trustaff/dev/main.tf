@@ -108,3 +108,16 @@ module "aks" {
   uami_id                     = module.identity.id
   acr_id                      = module.acr.id
 }
+
+module "jumpbox" {
+  source              = "../../../modules/jumpbox"
+  resource_group_name = module.resource_group.name
+  brand               = var.brand
+  environment         = var.environment
+  location            = var.location
+  aks_subnet_id       = module.networking.aks_subnet_id
+  ssh_public_key      = var.ssh_public_key
+  size                = var.size
+
+
+}

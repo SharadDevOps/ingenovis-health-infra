@@ -64,3 +64,15 @@ variable "acr_name" {
   description = "The name of the Azure Container Registry"
   type        = string
 }
+
+variable "ssh_public_key" {
+  type = string
+}
+
+variable "aks_subnet_id" {
+  type = string
+}
+
+variable "size" {
+  type = string
+}

@@ -28,8 +28,9 @@ resource "azurerm_cognitive_deployment" "gpt4o_mini" {
     version = "2025-04-14"
   }
 
-   sku {
-    name = "Standard"
+  scale {
+    capacity = 1
+    type     = "GlobalStandard"
   }
 }
 
@@ -40,6 +41,7 @@ resource "azurerm_private_endpoint" "openai" {
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoints_subnet_id
+
 
   private_service_connection {
     name                           = "psc-aoi-ing-${var.brand}-${var.environment}"

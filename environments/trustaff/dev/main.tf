@@ -85,3 +85,26 @@ module "ai_search" {
   location                    = var.location
   private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
 }
+
+module "acr" {
+  source                      = "../../../modules/acr"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  acr_name                    = var.acr_name
+  acr_sku                     = var.acr_sku
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+}
+
+module "aks" {
+  source                      = "../../../modules/aks"
+  resource_group_name         = module.resource_group.name
+  brand                       = var.brand
+  environment                 = var.environment
+  location                    = var.location
+  aks_subnet_id               = module.networking.aks_subnet_id
+  private_endpoints_subnet_id = module.networking.private_endpoints_subnet_id
+  uami_id                     = module.identity.id
+  acr_id                      = module.acr.id
+}

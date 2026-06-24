@@ -47,8 +47,7 @@ resource "azurerm_cosmosdb_sql_container" "candidates" {
   account_name        = azurerm_cosmosdb_account.this.name
   database_name       = azurerm_cosmosdb_sql_database.this.name
 
-  
-  partition_key_path = "/candidateId"
+  partition_key_paths = ["/candidateId"]
  
   unique_key {
     paths = ["/uniqueKey"]
@@ -62,7 +61,7 @@ resource "azurerm_cosmosdb_sql_container" "job-orders" {
   database_name       = azurerm_cosmosdb_sql_database.this.name
   
 
-  partition_key_path = "/jobOrderId"
+  partition_key_paths = ["/jobOrderId"]
 
   unique_key {
     paths = ["/uniqueKey"]
@@ -76,7 +75,7 @@ resource "azurerm_cosmosdb_sql_container" "matches" {
   database_name       = azurerm_cosmosdb_sql_database.this.name
 
 
-  partition_key_path = "/matchid"
+  partition_key_paths = ["/matchid"]
 
   unique_key {
     paths = ["/uniqueKey"]

@@ -1,6 +1,6 @@
 resource "azurerm_cosmosdb_account" "this" {
   name                = "cdb-ing-${var.brand}-${var.environment}"
-  location            = var.location
+  location            = "eastus2"
   resource_group_name = var.resource_group_name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
@@ -17,8 +17,9 @@ resource "azurerm_cosmosdb_account" "this" {
   }
 
   geo_location {
-    location          = var.location
+    location          = "eastus2"
     failover_priority = 0
+    zone_redundant    = false
   }
 
   capabilities {

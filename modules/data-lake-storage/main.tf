@@ -1,3 +1,5 @@
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_storage_account" "this" {
   name                     = "stingdl${var.brand}${var.environment}"
   resource_group_name      = var.resource_group_name
@@ -7,7 +9,7 @@ resource "azurerm_storage_account" "this" {
   account_kind             = "StorageV2"
   is_hns_enabled           = true
 
-  public_network_access_enabled = false
+  public_network_access_enabled = true
   tags = {
     brand       = var.brand
     environment = var.environment
@@ -23,6 +25,11 @@ resource "azurerm_storage_container" "historical-data" {
   container_access_type = "private"
 }
 
+resource "azurerm_role_assignment" "storage_blob_contributor" {
+  scope                = azurerm_storage_account.this.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
 
 resource "azurerm_private_endpoint" "storage_account" {
   name                = "pe-sa-ing-${var.brand}-${var.environment}"

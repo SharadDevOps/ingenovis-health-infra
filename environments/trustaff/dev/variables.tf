@@ -1,3 +1,5 @@
+
+# Global Variables
 variable "brand" {
   description = "Deployment brand. Set in terraform.tfvars."
   type        = string
@@ -13,6 +15,7 @@ variable "location" {
   type        = string
 }
 
+# Virtual Network Variables
 variable "vnet_address_space" {
   description = "Virtual network address space. Set in terraform.tfvars."
   type        = string
@@ -55,6 +58,8 @@ variable "client_secret" {
   sensitive   = true
 }
 
+# ACR Variables
+
 variable "acr_sku" {
   description = "The SKU of the Azure Container Registry"
   type        = string
@@ -65,14 +70,16 @@ variable "acr_name" {
   type        = string
 }
 
-variable "ssh_public_key" {
+
+variable "github_owner" {
   type = string
 }
 
-variable "aks_subnet_id" {
+
+variable "github_repository" {
   type = string
 }
 
-variable "size" {
+variable "github_token" {
   type = string
 }

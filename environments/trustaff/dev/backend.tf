@@ -24,3 +24,30 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
+provider "kubernetes" {
+  host                   = module.aks.host
+  cluster_ca_certificate = base64decode(module.aks.cluster_ca_certificate)
+  client_certificate     = base64decode(module.aks.client_certificate)
+  client_key             = base64decode(module.aks.client_key)
+}
+
+provider "github" {
+  owner = var.github_owner
+  token = var.github_token
+}
+
+provider "flux" {
+  kubernetes = {
+    host                   = module.aks.host
+    cluster_ca_certificate = base64decode(module.aks.cluster_ca_certificate)
+    client_certificate     = base64decode(module.aks.client_certificate)
+    client_key             = base64decode(module.aks.client_key)
+  }
+  git = {
+    url = "https://github.com/${var.github_owner}/${var.github_repository}.git"
+    http = {
+      username = "git"
+      password = var.github_token
+    }
+  }
+}

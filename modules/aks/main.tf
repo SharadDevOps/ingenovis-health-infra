@@ -4,7 +4,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   resource_group_name = var.resource_group_name
 
 
-  private_cluster_enabled = true
+  private_cluster_enabled = false
+  oidc_issuer_enabled     = true
   dns_prefix              = "aks-ing-${var.brand}-${var.environment}"
 
   default_node_pool {
@@ -34,9 +35,9 @@ resource "azurerm_kubernetes_cluster" "this" {
 
 
 resource "azurerm_role_assignment" "acr_pull" {
-  
+
   role_definition_name = "AcrPull"
-  scope        = var.acr_id
-  principal_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
+  scope                = var.acr_id
+  principal_id         = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
 
 }

@@ -109,15 +109,11 @@ module "aks" {
   acr_id                      = module.acr.id
 }
 
-module "jumpbox" {
-  source              = "../../../modules/jumpbox"
-  resource_group_name = module.resource_group.name
-  brand               = var.brand
-  environment         = var.environment
-  location            = var.location
-  aks_subnet_id       = module.networking.aks_subnet_id
-  ssh_public_key      = var.ssh_public_key
-  size                = var.size
+module "flux" {
+  source            = "../../../modules/flux"
+  github_owner      = var.github_owner
+  github_repository = var.github_repository
+  github_token      = var.github_token
 
-
+  depends_on = [module.aks]
 }

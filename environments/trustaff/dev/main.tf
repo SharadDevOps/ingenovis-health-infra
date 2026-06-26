@@ -30,7 +30,7 @@ module "identity" {
 
 
 module "keyvault" {
-  depends_on = [module.networking]
+  depends_on                  = [module.networking]
   source                      = "../../../modules/key-vault"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -42,7 +42,7 @@ module "keyvault" {
 }
 
 module "data_lake_storage" {
-  depends_on = [module.event_hub]
+  depends_on                  = [module.event_hub]
   source                      = "../../../modules/data-lake-storage"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -52,7 +52,7 @@ module "data_lake_storage" {
 }
 
 module "event_hub" {
-  depends_on = [module.keyvault]
+  depends_on                  = [module.keyvault]
   source                      = "../../../modules/event-hub"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -63,7 +63,7 @@ module "event_hub" {
 
 
 module "azure_openai" {
-  depends_on = [module.cosmos_db]
+  depends_on                  = [module.cosmos_db]
   source                      = "../../../modules/azure-openai"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -73,7 +73,7 @@ module "azure_openai" {
 }
 
 module "cosmos_db" {
-  depends_on = [module.data_lake_storage]
+  depends_on                  = [module.data_lake_storage]
   source                      = "../../../modules/cosmos-db"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -83,7 +83,7 @@ module "cosmos_db" {
 }
 
 module "ai_search" {
-  depends_on = [module.azure_openai]
+  depends_on                  = [module.azure_openai]
   source                      = "../../../modules/ai-search"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand
@@ -93,7 +93,7 @@ module "ai_search" {
 }
 
 module "acr" {
-  depends_on = [module.ai_search]
+  depends_on                  = [module.ai_search]
   source                      = "../../../modules/acr"
   resource_group_name         = module.resource_group.name
   brand                       = var.brand

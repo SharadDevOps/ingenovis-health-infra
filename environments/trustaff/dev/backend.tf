@@ -6,6 +6,20 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 3.100"
     }
+
+    flux = {
+      source  = "fluxcd/flux"
+      version = "~> 1.4"
+    }
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.30"
+    }
+
   }
 
   cloud {

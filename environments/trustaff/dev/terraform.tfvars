@@ -16,4 +16,6 @@ private_endpoints_subnet_prefix = "10.20.18.0/27"
 acr_sku  = "Premium"
 acr_name = "acringtrustaffdev"
 
+github_owner      = "SharadDevOps"
+github_repository = "ingenovis-matching-service"
 

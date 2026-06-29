@@ -83,3 +83,12 @@ variable "github_repository" {
 variable "github_token" {
   type = string
 }
+
+variable "hub_vnet_address_space" {
+  type = string
+}
+
+
+variable "hub_address_prefixes" {
+  type = string
+}

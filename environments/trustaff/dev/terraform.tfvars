@@ -8,6 +8,9 @@ aks_subnet_prefix               = "10.20.16.0/24"
 storage_subnet_prefix           = "10.20.17.0/24"
 private_endpoints_subnet_prefix = "10.20.18.0/27"
 
+hub_vnet_address_space = "10.0.0.0/20"
+hub_address_prefixes   = "10.0.0.0/26"
+
 # Subscription - currently all 3 brands point at the same free-tier subscription
 # (see decision log: real per-brand subscriptions deferred until budget approved)
 

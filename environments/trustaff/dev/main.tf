@@ -124,3 +124,19 @@ module "flux" {
 
   depends_on = [module.aks]
 }
+
+# HUB VNET
+
+module "hub-vnet" {
+  source              = "../../../modules/hub-network"
+  brand               = var.brand
+  environment         = var.environment
+  location            = var.location
+  resource_group_name = module.resource_group.name
+  vnet_address_space = var.hub_vnet_address_space
+  address_prefixes = var.hub_address_prefixes
+
+
+}
+
+

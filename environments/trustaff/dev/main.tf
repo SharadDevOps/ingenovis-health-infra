@@ -132,9 +132,30 @@ module "hub-vnet" {
   brand               = var.brand
   environment         = var.environment
   location            = var.location
-  resource_group_name = module.resource_group.name
-  vnet_address_space = var.hub_vnet_address_space
-  address_prefixes = var.hub_address_prefixes
+  vnet_address_space  = var.hub_vnet_address_space
+  address_prefixes    = var.hub_address_prefixes
+}
+
+resource "azurerm_virtual_network_peering" "hub_to_spoke" {
+  name                      = "peer-hub-to-trustaff-dev"
+  resource_group_name       = module.hub-vnet.resource_group_name
+  virtual_network_name      = "vnet-ing-gbl-core"
+  remote_virtual_network_id = module.networking.vnet_id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = true
+}
+
+resource "azurerm_virtual_network_peering" "spoke_to_hub" {
+  name                      = "peer-trustaff-dev-to-hub"
+  resource_group_name       = module.resource_group.name
+  virtual_network_name      = module.networking.vnet_name
+  remote_virtual_network_id = module.hub-vnet.id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  use_remote_gateways           = false
 }
 
 

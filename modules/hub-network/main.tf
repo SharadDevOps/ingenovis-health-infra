@@ -54,6 +54,6 @@ resource "azurerm_firewall" "firewall-hub" {
   ip_configuration {
     name                 = "configuration"
     subnet_id            = azurerm_subnet.firewall_subnet.id
-    public_ip_address_id = azurerm_public_ip.id
+    public_ip_address_id = azurerm_public_ip.pip.id
   }
 }

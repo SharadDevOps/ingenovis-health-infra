@@ -135,8 +135,6 @@ module "hub-vnet" {
   resource_group_name = module.resource_group.name
   vnet_address_space = var.hub_vnet_address_space
   address_prefixes = var.hub_address_prefixes
-
-
 }
 
 

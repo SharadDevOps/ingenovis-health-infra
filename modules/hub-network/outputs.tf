@@ -12,10 +12,11 @@ output "pip_id" {
 
 
 output "firewall_subnet_id" {
-    value = azurerm_firewall.firewall-hub.id
+    value = azurerm_firewall.firewall-hub.id   # this outputs the FIREWALL's id, not the subnet
 }
 
+
 output "firewall_private_ip" {
-  value = azurerm_firewall.firewall-hub.private_ip_ranges
+  value = azurerm_firewall.firewall-hub.ip_configuration[0].private_ip_address
 }
 

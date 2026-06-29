@@ -20,6 +20,7 @@ resource "azurerm_eventhub" "candidates" {
   namespace_name      = azurerm_eventhub_namespace.this.name
   partition_count     = 2
   message_retention   = 1
+
 }
 
 
@@ -43,6 +44,12 @@ resource "azurerm_private_endpoint" "event_hub" {
     private_connection_resource_id = azurerm_eventhub_namespace.this.id
     subresource_names              = ["namespace"]
     is_manual_connection            = false
+  }
+
+   tags = {
+    brand       = var.brand
+    environment = var.environment
+    managed_by  = "terraform"
   }
 }
 

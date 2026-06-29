@@ -48,7 +48,7 @@ resource "azurerm_cosmosdb_sql_container" "candidates" {
   database_name       = azurerm_cosmosdb_sql_database.this.name
 
   partition_key_paths = ["/candidateId"]
- 
+
   unique_key {
     paths = ["/uniqueKey"]
   }
@@ -59,7 +59,7 @@ resource "azurerm_cosmosdb_sql_container" "job-orders" {
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.this.name
   database_name       = azurerm_cosmosdb_sql_database.this.name
-  
+
 
   partition_key_paths = ["/jobOrderId"]
 
@@ -87,6 +87,12 @@ resource "azurerm_private_endpoint" "cosmosdb" {
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoints_subnet_id
+
+  tags = {
+    brand       = var.brand
+    environment = var.environment
+    managed_by  = "terraform"
+  }
 
   private_service_connection {
     name                           = "psc-cdb-ing-${var.brand}-${var.environment}"

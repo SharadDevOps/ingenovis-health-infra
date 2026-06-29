@@ -21,6 +21,12 @@ resource "azurerm_private_endpoint" "ai_searchservice" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoints_subnet_id
 
+   tags = {
+    brand       = var.brand
+    environment = var.environment
+    managed_by  = "terraform"
+  }
+
   private_service_connection {
     name                           = "psc-ais-ing-${var.brand}-${var.environment}"
     private_connection_resource_id = azurerm_search_service.this.id

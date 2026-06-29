@@ -9,7 +9,14 @@ resource "azurerm_storage_account" "this" {
   account_kind             = "StorageV2"
   is_hns_enabled           = true
 
-  public_network_access_enabled = true
+  public_network_access_enabled = true 
+
+   network_rules {
+    default_action = "Deny"
+    ip_rules       = ["49.36.188.5"]
+    bypass         = ["AzureServices"]
+  }
+
   tags = {
     brand       = var.brand
     environment = var.environment

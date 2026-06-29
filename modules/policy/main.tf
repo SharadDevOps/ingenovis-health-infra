@@ -12,3 +12,4 @@ resource "azurerm_subscription_policy_assignment" "this" {
   policy_definition_id = azurerm_policy_definition.this.id
   subscription_id      = "/subscriptions/${var.subscription_id}"
 }
+

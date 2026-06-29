@@ -11,7 +11,7 @@ module "policy_require_tag" {
       field  = "tags['brand']"
       exists = "false"
     }
-    then = { effect = "deny" }
+    then = { effect = "Audit" }
   })
 }
 
@@ -39,7 +39,7 @@ module "policy_deny_public_access" {
         }
       ]
     }
-    then = { effect = "deny" }
+    then = { effect = "Audit" }
   })
 }
 

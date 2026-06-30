@@ -5,7 +5,7 @@ resource "azurerm_container_registry" "acr" {
   sku                 = var.acr_sku
 
   admin_enabled                 = false
-  public_network_access_enabled = false
+  public_network_access_enabled = true
   
   tags = {
     brand       = var.brand
